@@ -18,9 +18,6 @@ export const getJeansByID = async (id) => {
 }
 
 export const getVariantsByID = async (id) => {
-  // const sizeRef = doc(db, "jeans", id, 'size')
-  // const querySnapshot = await getDocs(collection(jeansRef))
-  // return querySnapshot.map((doc) => {doc.data()})
   const sizeRef = collection(db, "jeans", id, "size")
   const querySnapshot = await getDocs(sizeRef);
   querySnapshot.forEach((doc) => {
