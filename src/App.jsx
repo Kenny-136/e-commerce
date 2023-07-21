@@ -1,7 +1,9 @@
-import data from './services/mockdata'
-import CardList from './components/CardList/CardList'
+import CardList from './components/ProductList/ProductList'
 import { useEffect, useState } from 'react'
 import getJeansData from './services/getJeansData'
+import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+import Home from './components/Home/Home'
+import ProductPage from './components/ProductPage/ProductPage'
 function App() {
   const [jeansData, setJeansData] = useState([]);
 
@@ -12,14 +14,14 @@ function App() {
 
   return (
     <>
-      <h1>billie jean</h1>
-      <div className="card">
-        <h2>
-          Michael J favourite denims
-        </h2>
+     <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/store' element={<CardList data={jeansData}/>}></Route>
+        <Route path='store/:id' element={<ProductPage />}></Route>
+      </Routes>
 
-        {/* <CardList data={data.data} /> */}
-      </div>
+      </BrowserRouter>
     </>
   )
 }

@@ -1,9 +1,10 @@
 import React from 'react'
 import Card from '../Card/Card'
-const CardList = ({data}) => {
-  console.log(data)
+import { Link } from 'react-router-dom'
+const CardList = ({ data }) => {
   return (
     <section>
+      <Link to={'/'}>Home</Link>
       {data.map(item => (
       <Card key={item.id} item={item}/>
       ))}

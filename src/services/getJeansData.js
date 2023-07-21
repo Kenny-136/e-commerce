@@ -1,5 +1,5 @@
 import { db } from "../config/firebase";
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
 
 const getJeansData = async () => {
   const collectionRef = collection(db, "jeans")
@@ -7,4 +7,27 @@ const getJeansData = async () => {
   const data = querySnapshot.docs.map((doc) => ({id: doc.id, ... doc.data()}))
   return data
 } 
+
+export const getJeansByID = async (id) => {
+  const jeansRef = doc(db, "jeans", id)
+  const querySnapshot = await getDoc(jeansRef)
+  if(!querySnapshot.exists()) {
+    throw new Error("Product not found")
+  }
+  return {id: querySnapshot.id, ...querySnapshot.data()}
+}
+
+export const getVariantsByID = async (id) => {
+  // const sizeRef = doc(db, "jeans", id, 'size')
+  // const querySnapshot = await getDocs(collection(jeansRef))
+  // return querySnapshot.map((doc) => {doc.data()})
+  const sizeRef = collection(db, "jeans", id, "size")
+  const querySnapshot = await getDocs(sizeRef);
+  querySnapshot.forEach((doc) => {
+  console.log(doc.id, " => ", doc.data());
+  });
+  const data = querySnapshot.docs.map((doc) => ({id: doc.id, ... doc.data()}))
+  return data
+}
+// export const decrementStockByID
 export default getJeansData
