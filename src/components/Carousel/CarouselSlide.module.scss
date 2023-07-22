@@ -1,0 +1,13 @@
+.slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carouselTitle {
+  margin: 0;
+
+  position: absolute;
+  left: 2em;
+  bottom: 1em;  
+}

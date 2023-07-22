@@ -1,4 +1,3 @@
-import CardList from './components/ProductList/ProductList'
 import { useEffect, useState } from 'react'
 import getJeansData from './services/getJeansData'
 import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
