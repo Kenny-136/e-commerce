@@ -1,0 +1,50 @@
+.wrapper {
+  margin: 0 auto;
+  max-width: 90vw;
+  display: flex;
+  flex-wrap: wrap;
+  border: 5px solid blue;
+
+  aside {
+    border: 5px solid purple;
+    img {
+      width: 40vw;
+    }
+  }
+}
+
+.sizeBar {
+  display: flex;
+  flex-direction: row;
+}
+
+.rightContainer {
+  width: 40vw;
+  border: 5px solid red;
+  padding-left: 2vw;
+  h1 {
+    font-size: 2vw;
+  }
+  p {
+    font-size: 1vw;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .wrapper {
+    aside {
+      img {
+        width: 80vw;
+      }
+    }
+  }
+  .rightContainer{
+    width: 40em;
+    h1 {
+      font-size: 5vw;
+    }
+    p {
+      font-size: 3vw;
+    }
+  }
+
+}
