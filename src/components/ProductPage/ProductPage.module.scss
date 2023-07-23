@@ -3,30 +3,31 @@
   max-width: 90vw;
   display: flex;
   flex-wrap: wrap;
-  border: 5px solid blue;
-
+  border-radius: 10px;
+  border: 1px black solid;
   aside {
-    border: 5px solid purple;
     img {
-      width: 40vw;
+      width: 45vw;
     }
   }
 }
 
 .sizeBar {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .rightContainer {
   width: 40vw;
-  border: 5px solid red;
   padding-left: 2vw;
   h1 {
+    font-size: 3vw;
+  }
+  h3 {
     font-size: 2vw;
   }
   p {
-    font-size: 1vw;
+    font-size: 1.5vw;
   }
 }
 @media only screen and (max-width: 900px) {
@@ -42,8 +43,11 @@
     h1 {
       font-size: 5vw;
     }
-    p {
+    h3 {
       font-size: 3vw;
+    }
+    p {
+      font-size: 2vw;
     }
   }
 

@@ -4,30 +4,41 @@ import { getJeansByID, getVariantsByID } from "../../services/getJeansData";
 import { Link } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import styles from "./ProductPage.module.scss";
+import { BsCartPlus } from "react-icons/bs";
 
 const ProductPage = () => {
 	const { id } = useParams();
 	const [jean, setJean] = useState(null);
 	const [variants, setVariants] = useState(null);
 	const [error, setError] = useState(null);
-	const [activeVariant, setActiveVariant] = useState();
+	const [activeVariant, setActiveVariant] = useState(null);
 
-	const [items, setItems] = useState(
-		JSON.parse(localStorage.getItem("items")) || []
+	const [cart, setCart] = useState(
+		JSON.parse(localStorage.getItem("cart")) || []
 	);
 	const handleChange = (e) => {
-		console.log(e.target.value);
 		const active = variants.filter((item) => item.id === e.target.value);
-		setActiveVariant(active);
+		setActiveVariant(active[0]);
 	};
 	const addToCart = () => {
-		setItems([...items, { jean, activeVariant }]);
+		const { id, name, price } = jean;
+		const size = activeVariant.id;
+		const item = { id, name, price, size, qty: 1 };
+		const same = cart.find(
+			(cartItem) => cartItem.id === item.id && cartItem.size === item.size
+		);
+
+		if (same) {
+			same.qty += 1;
+			setCart([...cart]);
+		} else {
+			setCart([...cart, { ...item }]);
+		}
 	};
 
 	useEffect(() => {
-		localStorage.setItem("items", JSON.stringify(items));
-		console.log(`Saved ${items.length} items to localstorage`);
-	}, [items]);
+		localStorage.setItem("cart", JSON.stringify(cart));
+	}, [cart]);
 
 	// Get Jeans Data from Services
 	useEffect(() => {
@@ -56,21 +67,30 @@ const ProductPage = () => {
 					</aside>
 					<section className={styles.rightContainer}>
 						<h1>{jean.name}</h1>
-						<p>{jean.desc}</p>
+						<h2>${jean.price}</h2>
+						<h3>{jean.desc}</h3>
+						{jean.favorite && <p>Our Best Selling Jeans!</p>}
 						<section className={styles.sizeBar}>
 							{variants && (
-								<select onChange={(e) => handleChange(e)}>
-									{variants.map((size) => (
-										<option key={size.id} value={size.id}>
-											Size: {size.id}
-										</option>
-									))}
-								</select>
+								<>
+									<select onChange={(e) => handleChange(e)}>
+										{variants.map((size) => (
+											<option key={size.id} value={size.id}>
+												Size: {size.id}
+											</option>
+										))}
+									</select>
+									<button type="button" onClick={addToCart}>
+										<BsCartPlus />
+										Add To Cart
+									</button>
+									{activeVariant && (
+										<p>
+											{activeVariant.qty} Stock of size {activeVariant.id} Left!
+										</p>
+									)}
+								</>
 							)}
-							<button type="button" onClick={addToCart}>
-								Add To Cart
-							</button>
-							{/* {activeVariant && <p></p>} */}
 						</section>
 					</section>
 				</section>
