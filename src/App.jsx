@@ -5,6 +5,7 @@ import Home from "./components/Home/Home";
 import ProductPage from "./components/ProductPage/ProductPage";
 import StorePage from "./components/StorePage/StorePage";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
+import "./App.css";
 function App() {
 	const [jeansData, setJeansData] = useState([]);
 

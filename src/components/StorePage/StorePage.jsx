@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "../NavBar/NavBar";
 import ProductList from "../ProductList/ProductList";
 import styles from "./StorePage.module.scss";
+import Footer from "../Footer/Footer";
 const StorePage = ({ data }) => {
 	return (
 		<main>

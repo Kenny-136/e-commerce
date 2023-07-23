@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import styles from "./ProductPage.module.scss";
 import { BsCartPlus } from "react-icons/bs";
-
+import Footer from "../Footer/Footer";
 const ProductPage = () => {
 	const { id } = useParams();
 	const [jean, setJean] = useState(null);
@@ -21,9 +21,9 @@ const ProductPage = () => {
 		setActiveVariant(active[0]);
 	};
 	const addToCart = () => {
-		const { id, name, price } = jean;
+		const { id, name, price, img } = jean;
 		const size = activeVariant.id;
-		const item = { id, name, price, size, qty: 1 };
+		const item = { id, name, price, size, img, qty: 1 };
 		const same = cart.find(
 			(cartItem) => cartItem.id === item.id && cartItem.size === item.size
 		);
