@@ -1,5 +1,5 @@
 import { db } from "../config/firebase";
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, updateDoc } from 'firebase/firestore'
 
 const getJeansData = async () => {
   const collectionRef = collection(db, "jeans")
@@ -25,5 +25,15 @@ export const getVariantsByID = async (id) => {
   const data = querySnapshot.docs.map((doc) => ({id: doc.id, ... doc.data()}))
   return data
 }
+
+export const updateFavoriteByID = async (id, bool) => {
+  const jeansRef = doc(db, "jeans", id)
+  await updateDoc(jeansRef, {
+    favorite: bool
+  })
+  return await getJeansByID(id)
+}
+
+
 // export const decrementStockByID
 export default getJeansData
