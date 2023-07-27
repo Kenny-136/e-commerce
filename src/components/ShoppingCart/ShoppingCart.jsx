@@ -3,45 +3,38 @@ import { useState, useEffect } from "react";
 import NavBar from "../NavBar/NavBar";
 import styles from "./ShoppingCart.module.scss";
 import { Link } from "react-router-dom";
-import {
-	AiOutlinePlusCircle,
-	AiOutlineMinusCircle,
-	AiOutlineDelete,
-} from "react-icons/ai";
+import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
-import Footer from "../Footer/Footer";
-const ShoppingCart = () => {
-	const [cart, setCart] = useState(
-		JSON.parse(localStorage.getItem("cart")) || []
-	);
+import getCustomerData, {
+	removeItemFromCartDB,
+	addItemToCartDB,
+} from "../../services/getCartData";
 
-	const incrementCart = (id, size) => {
-		const same = cart.find(
-			(cartItem) => cartItem.id === id && cartItem.size === size
-		);
-		same.qty += 1;
-		setCart([...cart]);
-	};
-
-	const decrementCart = (id, size) => {
-		const same = cart.find(
-			(cartItem) => cartItem.id === id && cartItem.size === size
-		);
-		if (same.qty > 0) {
-			same.qty -= 1;
-		} else {
-			same.qty = 0;
-		}
-		setCart([...cart]);
-	};
-	const removeFromCart = (i) => {
-		cart.splice(i, 1);
-		setCart([...cart]);
-	};
+const ShoppingCart = ({ data }) => {
+	const [cart, setCart] = useState([]);
 
 	useEffect(() => {
-		localStorage.setItem("cart", JSON.stringify(cart));
-	}, [cart]);
+		getCustomerData().then((data) => setCart(data.items));
+	}, []);
+
+	const removeBtn = (item) => {
+		removeItemFromCartDB(item).then((data) => setCart(data.items));
+	};
+
+	const qtyChange = (e, item) => {
+		const prevObj = cart.find(
+			(cartItem) => cartItem.id === item.id && cartItem.size === item.size
+		);
+		const { id, name, img, price, size } = item;
+		const qty = e.target.value;
+		const newObj = { id, name, img, price, size, qty };
+		console.log(prevObj.qty + " prev qty");
+		console.log(e.target.value + " target value");
+		console.log(newObj);
+		removeItemFromCartDB(prevObj).then((data) => setCart(data.items));
+		addItemToCartDB(newObj).then((data) => setCart(data.items));
+	};
+
 	return (
 		<main>
 			<NavBar />
@@ -62,20 +55,21 @@ const ShoppingCart = () => {
 									<h2>${item.price}</h2>
 									<h2>Size: {item.size}</h2>
 									<div className={styles.qtyBar}>
-										<button onClick={() => decrementCart(item.id, item.size)}>
-											<AiOutlineMinusCircle />
-										</button>
-										<h2>Quantity: {item.qty}</h2>
-										<button onClick={() => incrementCart(item.id, item.size)}>
-											<AiOutlinePlusCircle />
-										</button>
+										<h2>Update Quantity:</h2>
+										<select onChange={(e) => qtyChange(e, item)}>
+											{[...Array(Number(item.qty))].map((_, i) => (
+												<option key={i} value={i + 1}>
+													{i + 1}
+												</option>
+											))}
+										</select>
 									</div>
 									<h2>Total: ${item.qty * item.price}</h2>
 								</div>
 								<button
 									className={styles.delete}
-									onClick={() => removeFromCart(i)}
 									title="Remove from Cart"
+									onClick={() => removeBtn(item)}
 								>
 									<AiOutlineDelete />
 								</button>

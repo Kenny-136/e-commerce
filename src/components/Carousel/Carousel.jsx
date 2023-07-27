@@ -23,11 +23,14 @@ const Carousel = ({ data }) => {
 
 	useEffect(() => {
 		const timeoutFunction = () => {
+			console.log("awal");
 			handleNextClick();
-			setTimeout(timeoutFunction, 2000);
 		};
-		const timeoutId = setTimeout(timeoutFunction, 2000);
-		return () => clearTimeout(timeoutId);
+		const intervalId = setInterval(timeoutFunction, 2000);
+		return () => {
+			console.log("akhir");
+			clearInterval(intervalId);
+		};
 	}, []);
 
 	return (
