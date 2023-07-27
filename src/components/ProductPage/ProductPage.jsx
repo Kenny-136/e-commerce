@@ -10,6 +10,7 @@ import NavBar from "../NavBar/NavBar";
 import styles from "./ProductPage.module.scss";
 import { BsCartPlus } from "react-icons/bs";
 import Footer from "../Footer/Footer";
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 
 const ProductPage = () => {
 	const { id } = useParams();
@@ -68,7 +69,6 @@ const ProductPage = () => {
 		// Give an opposite value of existing boolean
 		const bool = !fav;
 		updateFavoriteByID(id, bool).then((data) => setFav(data.favorite));
-		console.log(`${id} favorite is now ${bool}`);
 	};
 
 	return (
@@ -84,13 +84,31 @@ const ProductPage = () => {
 						<h2>${jean.price}</h2>
 						<h3>{jean.desc}</h3>
 						{fav ? (
-							<p>Our Best Selling Jeans!</p>
+							<>
+								<p>Our Best Selling Jeans!</p>
+							</>
 						) : (
-							<p>Make this jeans your favorite!</p>
+							<>
+								<p>Make this jeans your favorite!</p>
+							</>
 						)}
-						<button type="button" onClick={favoriteFn}>
-							Favorite
-						</button>
+						{fav ? (
+							<button
+								type="button"
+								onClick={favoriteFn}
+								className={styles.favBtn}
+							>
+								<MdFavorite />
+							</button>
+						) : (
+							<button
+								type="button"
+								onClick={favoriteFn}
+								className={styles.favBtn}
+							>
+								<MdFavoriteBorder />
+							</button>
+						)}
 						<section className={styles.sizeBar}>
 							{variants && (
 								<>
