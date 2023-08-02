@@ -22,16 +22,16 @@ const Carousel = ({ data }) => {
 	};
 
 	useEffect(() => {
+		// Whenever currentIndex changes we'll start a timer to increment it
 		const timeoutFunction = () => {
-			console.log("awal");
+			// Increment current index
 			handleNextClick();
 		};
-		const intervalId = setInterval(timeoutFunction, 2000);
-		return () => {
-			console.log("akhir");
-			clearInterval(intervalId);
-		};
-	}, []);
+		const timeoutId = setTimeout(timeoutFunction, 2000);
+
+		// if currentIndex is changed before the timeout executes, we'll cancel it
+		return () => clearTimeout(timeoutId);
+	}, [currentlyDisplayed]);
 
 	return (
 		<section className={`${styles.wrapper}`}>

@@ -11,8 +11,8 @@ import getCustomerData, {
 } from "../../services/getCartData";
 
 const ShoppingCart = ({ data }) => {
+	console.log(data);
 	const [cart, setCart] = useState([]);
-
 	useEffect(() => {
 		getCustomerData().then((data) => setCart(data.items));
 	}, []);
@@ -28,9 +28,6 @@ const ShoppingCart = ({ data }) => {
 		const { id, name, img, price, size } = item;
 		const qty = e.target.value;
 		const newObj = { id, name, img, price, size, qty };
-		console.log(prevObj.qty + " prev qty");
-		console.log(e.target.value + " target value");
-		console.log(newObj);
 		removeItemFromCartDB(prevObj).then((data) => setCart(data.items));
 		addItemToCartDB(newObj).then((data) => setCart(data.items));
 	};
