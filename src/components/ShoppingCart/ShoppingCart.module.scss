@@ -1,0 +1,73 @@
+.item {
+  img {
+    width: 18vw;
+    height: 18vw;
+  }
+  border-bottom: 1px solid #000000;
+  padding: 2em;
+  display: flex;
+  gap: 5vw;
+}
+
+.qtyBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.75rem;
+  button {
+    background-color: transparent;
+    border: 0;
+    font-size: 1.5vw;
+    color: black;
+    &:hover {
+      cursor: pointer;
+      color: gray;
+    }
+    &:active {
+      color: blue;
+    }
+  }
+}
+.delete{
+  color: red;
+  font-size: 2vw;
+  background-color: transparent;
+  border: 0;
+  position: absolute;
+  right: 5vw;
+  &:hover {
+    color: black;
+    cursor: pointer;
+  }
+  &:active {
+    color: blue;
+  }
+}
+
+.checkout {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1vw;
+
+  &Btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  font-size: 1.5vw;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 15px;
+  margin-top: 0.5vw;
+  margin-left: 1vw;
+  padding: 5px;
+  &:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
+  &:active {
+    color: black;
+    background-color: gray;
+  }
+}
+}

@@ -1,0 +1,27 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-bottom: 4px solid black;
+  align-items: center;
+  margin-bottom: 2vh;
+  height: 5vh;
+  a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    font-size: 20px;
+    color: black;
+  }
+  a:visited {
+    color: black;
+  }
+  a:hover {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: black;
+    color: white;
+  }
+}

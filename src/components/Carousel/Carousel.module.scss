@@ -1,0 +1,38 @@
+.carousel {
+  display: flex;
+  align-items: center;
+  
+}
+h1, p {
+  font-family: Lato;
+}
+
+.wrapper {
+  position: relative;
+  min-height: 250px;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.carouselAction {
+  height: 100%;
+  position: absolute;
+  border: 0;
+  font-size: 48px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+.carouselAction.actionPrev {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+
+}
+
+.carouselAction.actionNext {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}

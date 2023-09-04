@@ -1,0 +1,26 @@
+.card {
+  max-width: 300px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color:#dde1e4;
+  padding: 10px;
+  img {
+    max-width: 300px;
+  }
+  a {
+    text-decoration: none;
+  }
+  a:visited {
+    color: black;
+
+  }
+  h3 {
+  }
+}
+
+.priceWrap {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+}
